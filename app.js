@@ -87,15 +87,27 @@ app.post("/webhook", (req, res) => {
 
           // Create new client
           var client = sheetdb(config);
-
-          // Adds single row
-          client.create({ Index: 1, Token: 1001, Name: from_name, Phone: from, Date: indiaDate , Time: indiaTime }, "Store A").then(function(data) {
-            console.log(data);
-          }, function(err){
-            console.log(err);
-          });
           
-          //Count total rows in sheet
+          client.endpoint('count').then(function(data) { // count total no of rows
+          console.log(data);
+          var jsonParsed = JSON.parse(data);
+          console.log(jsonParsed.rows);
+          var index = jsonParsed.rows + 1; //get index 
+          var token = 1000 + jsonParsed.rows; // token number 
+            
+             // Adds single row
+              client.create({ Index: index, Token: token, Name: from_name, Phone: from, Date: indiaDate , Time: indiaTime }, "Store A").then(function(data) {
+                console.log(data);
+              }, function(err){
+                console.log(err);
+              });          
+           //Count total rows in sheet
+            
+          }, function(error){
+              console.log(error);
+          })
+
+         
 
           // End of google sheet code
           
@@ -129,7 +141,8 @@ app.post("/webhook", (req, res) => {
         data: {
           messaging_product: "whatsapp",
           to: from,
-          text: { body: "ack: " +msg_body }, //msg_body
+          //text: { body: "ack: " +msg_body }, //msg_body
+          text: { body: "Hello "+from_name+", Kindly scan valid QR code!"},
         },
         headers: { "Content-Type": "application/json" },
       });

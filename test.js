@@ -59,7 +59,8 @@ client.create({ Index: 1, Token: 1001, Name: "Mahesh", Phone: 9876543210, Date: 
 
 client.endpoint('count').then(function(data) {
     console.log(data);
-    console.log(data.rows);
+    var jsonParsed = JSON.parse(data);
+    console.log(jsonParsed.rows);
 }, function(error){
     console.log(error);
 })
