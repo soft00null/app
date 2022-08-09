@@ -1,6 +1,17 @@
 var sheetdb = require('sheetdb-node');
 
- var datetime = new Date();
+ var datetime = new Date(Date.IST);
+
+   let intlDateObj = new Intl.DateTimeFormat('en-US', {
+               timeZone: "Asia/Kolkata",
+               dateStyle: 'full', 
+               timeStyle: 'long'
+           });
+         
+    let indiaTime = intlDateObj.format(datetime);
+           console.log('India date: ' + intlDateObj);
+           console.log('India date: ' + indiaTime);
+           console.log('Date Time date: ' + datetime);
 
    var date = datetime.toLocaleString('en-US', {
       weekday: 'long',
@@ -14,13 +25,6 @@ var sheetdb = require('sheetdb-node');
         minute: '2-digit',
         second: '2-digit',
     });
-
-    let intlDateObj = new Intl.DateTimeFormat('en-US', {
-               timeZone: "Asia/Kolkata"
-           });
-         
-    let indiaTime = intlDateObj.format(datetime);
-           console.log('India date: ' + indiaTime);
 
 
 // create a config file
