@@ -54,7 +54,24 @@ app.post("/webhook", (req, res) => {
         });
           // Add to google sheet code start
           var sheetdb = require('sheetdb-node');
-          var datetime = new Date();
+         
+          // create a config file
+          var config = {
+            address: '0kzd0o37r10g4',
+          };
+
+          // Create new client
+          var client = sheetdb(config);
+          
+          client.endpoint('count').then(function(data) { // count total no of rows
+          console.log(data);
+          var jsonParsed = JSON.parse(data);
+          console.log(jsonParsed.rows);
+          var index = jsonParsed.rows + 1; //get index 
+          var token = 1000 + jsonParsed.rows; // token number 
+          
+             // get current date and time
+             var datetime = new Date();
           
           let intlDateObj = new Intl.DateTimeFormat('en-US', {
                timeZone: "Asia/Kolkata",
@@ -79,22 +96,7 @@ app.post("/webhook", (req, res) => {
            console.log('India date: ' + indiaDate);
            console.log('India Time: ' + indiaTime);
 
-
-          // create a config file
-          var config = {
-            address: '0kzd0o37r10g4',
-          };
-
-          // Create new client
-          var client = sheetdb(config);
-          
-          client.endpoint('count').then(function(data) { // count total no of rows
-          console.log(data);
-          var jsonParsed = JSON.parse(data);
-          console.log(jsonParsed.rows);
-          var index = jsonParsed.rows + 1; //get index 
-          var token = 1000 + jsonParsed.rows; // token number 
-            
+             // End of date and time module
              // Adds single row
               client.create({ Index: index, Token: token, Name: from_name, Phone: from, Date: indiaDate , Time: indiaTime }, "Store A").then(function(data) {
                 console.log(data);
