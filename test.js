@@ -55,6 +55,13 @@ client.create({ Index: 1, Token: 1001, Name: "Mahesh", Phone: 9876543210, Date: 
   console.log(err);
 });
 
+//count number of rows in sheet
+
+client.endpoint('count').then(function(data) {
+    console.log(data);
+}, function(error){
+    console.log(error);
+})
 
 // Adds single row to worksheet named "date"
 //client.create({ Index: 1, Token: 1001, Name: "Mahesh", Phone: 9876543210, Date: date , Time: time}, "Store B").then(function(data) {
