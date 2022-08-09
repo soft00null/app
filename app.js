@@ -1,15 +1,26 @@
 var sheetdb = require('sheetdb-node');
 
- var datetime = new Date(Date.IST);
+ var datetime = new Date();
 
    let intlDateObj = new Intl.DateTimeFormat('en-US', {
                timeZone: "Asia/Kolkata",
                dateStyle: 'full', 
-               timeStyle: 'long'
+               timeStyle: 'full'
+           });
+
+ let date1 = new Intl.DateTimeFormat('en-US', {
+               timeZone: "Asia/Kolkata",
+               dateStyle: 'full' 
+               //timeStyle: 'full'
+           });
+let time1 = new Intl.DateTimeFormat('en-US', {
+               timeZone: "Asia/Kolkata",
+               //dateStyle: 'full' 
+               timeStyle: 'full'
            });
          
     let indiaTime = intlDateObj.format(datetime);
-           console.log('India date: ' + intlDateObj);
+          // console.log('India date: ' + intlDateObj);
            console.log('India date: ' + indiaTime);
            console.log('Date Time date: ' + datetime);
 
