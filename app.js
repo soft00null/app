@@ -15,6 +15,13 @@ var sheetdb = require('sheetdb-node');
         second: '2-digit',
     });
 
+    let intlDateObj = new Intl.DateTimeFormat('en-US', {
+               timeZone: "Asia/Kolkata"
+           });
+         
+    let indiaTime = intlDateObj.format(datetime);
+           console.log('India date: ' + indiaTime);
+
 
 // create a config file
 var config = {
