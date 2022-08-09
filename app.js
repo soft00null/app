@@ -33,7 +33,7 @@ client.create({ Index: 1, Token: 1001, Name: "Mahesh", Phone: 9876543210, Date: 
 
 
 // Adds single row to worksheet named "date"
-client.create({ Index: 1, Token: 1001, Name: "Mahesh", Phone: 9876543210, Date: date , Time: time}, date).then(function(data) {
+client.create({ Index: 1, Token: 1001, Name: "Mahesh", Phone: 9876543210, Date: date , Time: time}, "Store B").then(function(data) {
   console.log(data);
 }, function(err){
   console.log(err);
