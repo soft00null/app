@@ -53,7 +53,7 @@ app.post("/webhook", (req, res) => {
           var jsonParsed = JSON.parse(data);
           console.log(jsonParsed.rows);
           var index = jsonParsed.rows + 1; //get index 
-          var visit_token = 1000 + jsonParsed.rows; // token number 
+          var visit_token = 123400000 + jsonParsed.rows; // token number 
           
           // get current date and time
           var datetime = new Date();
@@ -93,7 +93,7 @@ app.post("/webhook", (req, res) => {
             "type": "image",
             "image": {
                 "caption": "Hello "+from_name+", Welcome to our store! Your token number is: "+visit_token+" & Check in time is "+indiaTime,
-                "link": "https://bwipjs-api.metafloor.com/?bcid=code128&text=AB1234567890&scale=3&rotate=N&includetext&backgroundcolor=FFFFF"},
+                "link": "https://bwipjs-api.metafloor.com/?bcid=code128&text="+visit_token+"&scale=3&rotate=N&includetext&backgroundcolor=FFFFFF"},
             //"link": "https://i.ibb.co/hff1hmb/chitle.png"}, //Send image in WhatsApp reply
 
           },
