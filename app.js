@@ -35,23 +35,8 @@ app.post("/webhook", (req, res) => {
       
       if (msg_body == "checkin:0009")
         {
-        axios({
-        method: "POST", // Required, HTTP method, a string, e.g. POST, GET
-        url: "https://graph.facebook.com/v12.0/" + phone_number_id + "/messages?access_token=" + token,
-        data: {
-          messaging_product: "whatsapp",
-          to: from,
-          //text: { body: "hello: " + msg_body },
-          //Send image 
-          "type": "image",
-          "image": {
-              "caption": "Hello "+from_name+", Welcome to Chitle bandhu!",
-              "link": "https://i.ibb.co/hff1hmb/chitle.png"},
-          //
+                         
           
-        },
-        headers: { "Content-Type": "application/json" },
-        });
           // Add to google sheet code start
           var sheetdb = require('sheetdb-node');
          
@@ -68,10 +53,10 @@ app.post("/webhook", (req, res) => {
           var jsonParsed = JSON.parse(data);
           console.log(jsonParsed.rows);
           var index = jsonParsed.rows + 1; //get index 
-          var token = 1000 + jsonParsed.rows; // token number 
+          var visit_token = 1000 + jsonParsed.rows; // token number 
           
-             // get current date and time
-             var datetime = new Date();
+          // get current date and time
+          var datetime = new Date();
           
           let intlDateObj = new Intl.DateTimeFormat('en-US', {
                timeZone: "Asia/Kolkata",
@@ -95,10 +80,29 @@ app.post("/webhook", (req, res) => {
           
            console.log('India date: ' + indiaDate);
            console.log('India Time: ' + indiaTime);
+            
+          //Send WhatsApp reply  
+          axios({
+          method: "POST", // Required, HTTP method, a string, e.g. POST, GET
+          url: "https://graph.facebook.com/v12.0/" + phone_number_id + "/messages?access_token=" +token,
+          data: {
+            messaging_product: "whatsapp",
+            to: from,
+            //text: { body: "hello: " + msg_body },
+            //Send image 
+            "type": "image",
+            "image": {
+                "caption": "Hello "+from_name+", Welcome to Chitle bandhu! Your token number is:"+visit_token,
+                "link": "https://i.ibb.co/hff1hmb/chitle.png"},
+            //
+
+          },
+          headers: { "Content-Type": "application/json" },
+          }); //End of WhatsApp reply
 
              // End of date and time module
              // Adds single row
-              client.create({ Index: index, Token: token, Name: from_name, Phone: from, Date: indiaDate , Time: indiaTime }, "Store A").then(function(data) {
+              client.create({ Index: index, Token: visit_token, Name: from_name, Phone: from, Date: indiaDate , Time: indiaTime }, "Store A").then(function(data) {
                 console.log(data);
               }, function(err){
                 console.log(err);
