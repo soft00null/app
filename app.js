@@ -93,7 +93,7 @@ app.post("/webhook", (req, res) => {
             "type": "image",
             "image": {
                 "caption": "Hello "+from_name+", Welcome to our store! Your token number is: "+visit_token+" & Check in time is "+indiaTime,
-                "link": "https://bwipjs-api.metafloor.com/?bcid=ultracode&text=1234567890"},
+                "link": "https://bwipjs-api.metafloor.com/?bcid=code128&text=AB1234567890&scale=3&rotate=N&includetext&backgroundcolor=FFFFF"},
             //"link": "https://i.ibb.co/hff1hmb/chitle.png"}, //Send image in WhatsApp reply
 
           },
