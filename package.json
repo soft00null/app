@@ -16,6 +16,7 @@
     "fastify": "^4.2.1",
     "firebase-admin": "^11.0.1",
     "handlebars": "^4.7.7",
+    "node-html-to-image": "^3.2.4",
     "request": "^2.88.2",
     "sheetdb-node": "0.0.12"
   },
