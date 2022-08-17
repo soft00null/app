@@ -92,9 +92,10 @@ app.post("/webhook", (req, res) => {
             //Send image 
             "type": "image",
             "image": {
-                "caption": "Hello "+from_name+", Welcome to our store! Your token number is: "+visit_token+" & Check in time is "+indiaTime,
-                "link": "https://bwipjs-api.metafloor.com/?bcid=code128&text="+visit_token+"&scale=3&rotate=N&includetext&backgroundcolor=FFFFFF"},
+                "caption": "Hello "+from_name+", Welcome to Simira Diagnostics! Your token number is: "+visit_token+" & Check in time is "+indiaTime,
+                "link": "https://simiradiagnostics.com/wp-content/themes/horizondiagnostic/images/popup.jpeg"},
             //"link": "https://i.ibb.co/hff1hmb/chitle.png"}, //Send image in WhatsApp reply
+            //https://bwipjs-api.metafloor.com/?bcid=code128&text="+visit_token+"&scale=3&rotate=N&includetext&backgroundcolor=FFFFFF
 
           },
           headers: { "Content-Type": "application/json" },
