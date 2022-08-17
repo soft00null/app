@@ -48,7 +48,9 @@ app.post("/webhook", (req, res) => {
           // Create new client
           var client = sheetdb(config);
           
-          client.endpoint('count',{sheet: "HQ" }).then(function(data) { // count total no of rows
+          const cli = sheetdb({ address: '0kzd0o37r10g4',sheet: "HQ" }); 
+          
+          cli.endpoint('count').then(function(data) { // count total no of rows
           console.log(data);
           var jsonParsed = JSON.parse(data);
           console.log(jsonParsed.rows);
