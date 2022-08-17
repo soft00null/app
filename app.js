@@ -44,17 +44,11 @@ app.post("/webhook", (req, res) => {
           var config = {
             address: '0kzd0o37r10g4',
           };
-
-          var config_sheet = {
-            method: 'get',
-            url: 'https://sheetdb.io/api/v1/0kzd0o37r10g4?sheet=HQ',
-            headers: { }
-          }; //get data from HQ sheet
           
           // Create new client
           var client = sheetdb(config);
           
-          //const cli = sheetdb({ address: '0kzd0o37r10g4',sheet: 'HQ' }); //Get count from sheet HQ
+          //const cli = sheetdb({ address: '0kzd0o37r10g4', sheet: 'HQ' }); //Get count from sheet HQ
           
           client.endpoint('count').then(function(data) { // count total no of rows
           console.log(data);
