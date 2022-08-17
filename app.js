@@ -33,7 +33,7 @@ app.post("/webhook", (req, res) => {
       let from_name = req.body.entry[0].changes[0].value.contacts[0].profile.name; // extract the phone number from the webhook payload
       let msg_body = req.body.entry[0].changes[0].value.messages[0].text.body; // extract the message text from the webhook payload
       
-      if (msg_body == "checkin:0009")
+      if (msg_body == "Checkin:HQ")
         {
                          
           
@@ -103,7 +103,7 @@ app.post("/webhook", (req, res) => {
 
              // End of date and time module
              // Adds single row
-              client.create({ Index: index, Token: visit_token, Name: from_name, Phone: from, Date: indiaDate , Time: indiaTime }, "Store A").then(function(data) {
+              client.create({ Index: index, Token: visit_token, Name: from_name, Phone: from, Date: indiaDate , Time: indiaTime }, "HQ").then(function(data) {
                 console.log(data);
               }, function(err){
                 console.log(err);
