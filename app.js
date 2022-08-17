@@ -53,7 +53,7 @@ app.post("/webhook", (req, res) => {
           var jsonParsed = JSON.parse(data);
           console.log(jsonParsed.rows);
           var index = jsonParsed.rows + 1; //get index 
-          var visit_token = 123400000 + jsonParsed.rows; // token number 
+          var visit_token = 123400001 + jsonParsed.rows; // token number 
           
           // get current date and time
           var datetime = new Date();
