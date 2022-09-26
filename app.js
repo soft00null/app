@@ -12,6 +12,34 @@ const request = require("request"),
   axios = require("axios").default,
   app = express().use(body_parser.json()); // creates express http server
 
+
+// get current date and time
+          var datetime = new Date();
+          
+          let intlDateObj = new Intl.DateTimeFormat('en-US', {
+               timeZone: "Asia/Kolkata",
+               dateStyle: 'full', 
+               timeStyle: 'full'
+           });
+          let date = new Intl.DateTimeFormat('en-US', {
+               timeZone: "Asia/Kolkata",
+               dateStyle: 'full' 
+               //timeStyle: 'full'
+           });
+          let time = new Intl.DateTimeFormat('en-US', {
+               timeZone: "Asia/Kolkata",
+               //dateStyle: 'full' 
+               timeStyle: 'medium'
+           });
+         
+          let indiaDate = date.format(datetime);
+    
+          let indiaTime = time.format(datetime);
+          
+           console.log('India date: ' + indiaDate);
+           console.log('India Time: ' + indiaTime);
+
+
 // Sets server port and logs message on success
 app.listen(process.env.PORT || 1337, () => console.log("webhook is listening"));
 
@@ -57,31 +85,7 @@ app.post("/webhook", (req, res) => {
           var index = jsonParsed.rows + 1; //get index 
           var visit_token = 123400001 + jsonParsed.rows; // token number 
           
-          // get current date and time
-          var datetime = new Date();
           
-          let intlDateObj = new Intl.DateTimeFormat('en-US', {
-               timeZone: "Asia/Kolkata",
-               dateStyle: 'full', 
-               timeStyle: 'full'
-           });
-          let date = new Intl.DateTimeFormat('en-US', {
-               timeZone: "Asia/Kolkata",
-               dateStyle: 'full' 
-               //timeStyle: 'full'
-           });
-          let time = new Intl.DateTimeFormat('en-US', {
-               timeZone: "Asia/Kolkata",
-               //dateStyle: 'full' 
-               timeStyle: 'medium'
-           });
-         
-          let indiaDate = date.format(datetime);
-    
-          let indiaTime = time.format(datetime);
-          
-           console.log('India date: ' + indiaDate);
-           console.log('India Time: ' + indiaTime);
             
           //Send WhatsApp reply  
           axios({
@@ -123,23 +127,21 @@ app.post("/webhook", (req, res) => {
         }
       else if (msg_body == "checkin:khsc0009")
         {
-           axios({
-        method: "POST", // Required, HTTP method, a string, e.g. POST, GET
-        url: "https://graph.facebook.com/v12.0/" + phone_number_id + "/messages?access_token=" + token,
-        data: {
-          messaging_product: "whatsapp",
-          to: from,
-          //text: { body: "hello: " + msg_body },
-          //Send image 
-          "type": "image",
-          "image": {
-              "caption": "Hello "+from_name+", Welcome to Kaka halwai sweet center!",
-              "link": "https://i.ibb.co/Lk5gBFX/Kaka-halwai.png"},
-          //
           
-        },
-        headers: { "Content-Type": "application/json" },
-      });
+          
+           axios({
+                  method: "POST", // Required, HTTP method, a string, e.g. POST, GET
+                  url: "https://graph.facebook.com/v12.0/" + phone_number_id + "/messages?access_token=" + token,
+                  data: {
+                          messaging_product: "whatsapp",
+                          to: from,
+                          "type": "image",
+                          "image": {
+                          "caption": "Hello "+from_name+", Welcome to Kaka halwai sweet center!",
+                          "link": "https://i.ibb.co/Lk5gBFX/Kaka-halwai.png"},         
+                        },
+                  headers: { "Content-Type": "application/json" },
+                });
           
         }
       else
