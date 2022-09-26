@@ -22,9 +22,18 @@ axios(config).then(function (response) {
   var d = JSON.stringify(response.data);
   
   var jsonObj = JSON.parse(d); //Fetch Object
-  console.log(jsonObj.data);
+  console.log(jsonObj.code);
   
- var count = Object.keys(jsonObj.data).length; //Count length of total entries in Centre
+  if (jsonObj.code == '3100')
+    {
+      var count = 0;
+    }
+  else if (jsonObj.code == '3000')
+    {
+      var count = Object.keys(jsonObj.data).length; //Count length of total entries in Centre
+      console.log(jsonObj.data);
+    }
+  
   console.log(count);
 })
 .catch(function (error) {

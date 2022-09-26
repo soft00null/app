@@ -153,9 +153,16 @@ app.post("/webhook", (req, res) => {
   
                   var jsonObj = JSON.parse(d); //Fetch Object
                   console.log(jsonObj.data);
-
-                  var count = Object.keys(jsonObj.data).length; //Count length of total entries in Centre
-                  console.log(count);
+            
+                  if (jsonObj.code == '3100')
+                  {
+                    var count = 0;
+                  }
+                  else if (jsonObj.code == '3000')
+                  {
+                    var count = Object.keys(jsonObj.data).length; //Count length of total entries in Centre
+                    console.log(jsonObj.data);
+                  }
                   
                   var token_no = count + 90001; //Set the Token number
             
