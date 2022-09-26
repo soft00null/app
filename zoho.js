@@ -14,9 +14,11 @@ var config = {
 axios(config)
 .then(function (response) {
   var d = JSON.stringify(response.data);
-  console.log(d);
   
-  var count = Object.keys(d.data).length;
+  var jsonObj = JSON.parse(d); //Fetch Object
+  console.log(jsonObj.data);
+  
+ var count = Object.keys(jsonObj.data).length; //Count length of total entries in Centre
   console.log(count);
 })
 .catch(function (error) {
