@@ -5,12 +5,17 @@
 // access token for your app (copy from DevX getting started page)
 const token = "EAAH2yAzd7coBAOoCkyhhOCuqZB0tqtgy1ZAgknjDK9eFb93QYkOI1TXIzLwODVxV47nezU2rZBfODlPcsLa91xxvxkgQZBAlwG9xzkqCILavqtbXkkPNIWw3SwUTUzoorj7sjg8SIKX4dLEpmMKqx5TGUSo9BHEx4WYZAkyxqFZCXVpvkE4NcZC";
 
+//zoho token
+
+const access_token = "1000.d332b5f00834aea639ae43a36670079a.92ff3009d2d13f7835faf453dce0e68b";
+
 // Imports dependencies and set up http server
 const request = require("request"),
   express = require("express"),
   body_parser = require("body-parser"),
   axios = require("axios").default,
   app = express().use(body_parser.json()); // creates express http server
+
 
 
 // get current date and time
@@ -140,7 +145,7 @@ app.post("/webhook", (req, res) => {
                               method: 'get',
                               url: 'https://creator.zoho.in/api/v2/chatbot1234/test/report/'+centre_name+'_Checkin',
                               headers: { 
-                                        'Authorization': 'Zoho-oauthtoken 1000.60bb258dc12e258e85773545948c1b0a.27afcb96e24b78256912620e2a478cc4', 
+                                        'Authorization': 'Zoho-oauthtoken '+access_token+'', 
                                         'Cookie': 'ZCNEWLIVEUI=true; _zcsr_tmp=024af6fc-58a3-4e14-897b-ca50bf560c07; fa8dd4bb5a=3494010c8cb824229e44a51a4dce0868; zccpn=024af6fc-58a3-4e14-897b-ca50bf560c07'
                                        },
                               data : rest_data
@@ -154,17 +159,19 @@ app.post("/webhook", (req, res) => {
                   var jsonObj = JSON.parse(d); //Fetch Object
                   console.log(jsonObj.data);
             
-                  if (jsonObj.code == '3100')
+                  if (jsonObj.code == "3100")
                   {
-                    var count = 0;
+                    
+                    var token_no = 90001; // When there is no data 
                   }
-                  else if (jsonObj.code == '3000')
+                  else if (jsonObj.code == "3000")
                   {
                     var count = Object.keys(jsonObj.data).length; //Count length of total entries in Centre
                     console.log(jsonObj.data);
+                    var token_no = count + 90001; //Set the Token number
                   }
                   
-                  var token_no = count + 90001; //Set the Token number
+                  
             
             //WhatsApp message send 
              axios({
@@ -187,7 +194,7 @@ app.post("/webhook", (req, res) => {
                           method: 'post',
                           url: 'https://creator.zoho.in/api/v2/chatbot1234/test/form/'+centre_name+'',
                           headers: { 
-                            'Authorization': 'Zoho-oauthtoken 1000.60bb258dc12e258e85773545948c1b0a.27afcb96e24b78256912620e2a478cc4', 
+                            'Authorization': 'Zoho-oauthtoken '+access_token+'', 
                             'Content-Type': 'text/plain', 
                             'Cookie': 'ZCNEWLIVEUI=true; _zcsr_tmp=024af6fc-58a3-4e14-897b-ca50bf560c07; fa8dd4bb5a=3494010c8cb824229e44a51a4dce0868; zccpn=024af6fc-58a3-4e14-897b-ca50bf560c07'
                           },
