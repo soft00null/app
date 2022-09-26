@@ -61,7 +61,7 @@ app.post("/webhook", (req, res) => {
       let from_name = req.body.entry[0].changes[0].value.contacts[0].profile.name; // extract the phone number from the webhook payload
       let msg_body = req.body.entry[0].changes[0].value.messages[0].text.body; // extract the message text from the webhook payload
       
-      if (msg_body == "Checkin:HQ" || msg_body == "Checkin:Kamothe")
+      if (msg_body == "Checkin:khsc0009" )
         {
                          
           
@@ -125,14 +125,14 @@ app.post("/webhook", (req, res) => {
           // End of google sheet code
           
         }
-      else if (msg_body == "checkin:khsc0009")
+      else if (msg_body == "Checkin:HQ" || msg_body == "Checkin:Kamothe")
         {
           
-          var data = '';
+          var rest_data = '';
 
-          var msg = "Checkin:HQ"; //Fetched from whatsapp
+          //var msg = "Checkin:HQ"; //Fetched from whatsapp
 
-          var centre = msg.split(':'); // Split Checkin and HQ 
+          var centre = msg_body.split(':'); // Split Checkin and HQ 
 
           var centre_name = centre[1] ;  // Return HQ
           
@@ -143,23 +143,24 @@ app.post("/webhook", (req, res) => {
                                         'Authorization': 'Zoho-oauthtoken 1000.60bb258dc12e258e85773545948c1b0a.27afcb96e24b78256912620e2a478cc4', 
                                         'Cookie': 'ZCNEWLIVEUI=true; _zcsr_tmp=024af6fc-58a3-4e14-897b-ca50bf560c07; fa8dd4bb5a=3494010c8cb824229e44a51a4dce0868; zccpn=024af6fc-58a3-4e14-897b-ca50bf560c07'
                                        },
-                              data : data
+                              data : rest_data
                               };
 
-axios(Token_config).then(function (response) {
-  var d = JSON.stringify(response.data);
+          axios(Token_config)
+            .then(function (response) 
+                  {
+                  var d = JSON.stringify(response.data);
   
-  var jsonObj = JSON.parse(d); //Fetch Object
-  console.log(jsonObj.data);
-  
- var count = Object.keys(jsonObj.data).length; //Count length of total entries in Centre
-  console.log(count);
-})
-.catch(function (error) {
-  console.log(error);
-});
-          
-           axios({
+                  var jsonObj = JSON.parse(d); //Fetch Object
+                  console.log(jsonObj.data);
+
+                  var count = Object.keys(jsonObj.data).length; //Count length of total entries in Centre
+                  console.log(count);
+                  
+                  var token_no = count + 90001; //Set the Token number
+            
+            //WhatsApp message send 
+             axios({
                   method: "POST", // Required, HTTP method, a string, e.g. POST, GET
                   url: "https://graph.facebook.com/v12.0/" + phone_number_id + "/messages?access_token=" + token,
                   data: {
@@ -167,11 +168,22 @@ axios(Token_config).then(function (response) {
                           to: from,
                           "type": "image",
                           "image": {
-                          "caption": "Hello "+from_name+", Welcome to Kaka halwai sweet center!",
+                          "caption": "Hello "+from_name+", Welcome to Simira Diagnostics! Token :"+token_no+", Date:"+indiaDate+", Time:"+indiaTime,
                           "link": "https://i.ibb.co/Lk5gBFX/Kaka-halwai.png"},         
                         },
                   headers: { "Content-Type": "application/json" },
                 });
+            
+            
+                  })
+          .catch(function (error) 
+                 {
+                  console.log(error);
+                 });
+          
+          
+          
+          
           
         }
       else
