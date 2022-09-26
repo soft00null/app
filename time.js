@@ -8,7 +8,7 @@ let intlDateObj = new Intl.DateTimeFormat('en-GB', {
            });
           let date = new Intl.DateTimeFormat('en-GB', {
                timeZone: "Asia/Kolkata",
-               dateStyle: 'long' 
+               dateStyle: 'full' 
                //timeStyle: 'full'
            });
           let time = new Intl.DateTimeFormat('en-US', {
