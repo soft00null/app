@@ -2,16 +2,15 @@ var axios = require('axios');
 
 var data = JSON.stringify({
   "amount": 1000,
-  "currency": "INR",
-  "accept_partial": false,
-  "expire_by": 1691097057,
-  "reference_id": "TUU776876",
-  "description": "Payment for bill ID #23456",
-  "customer": {
-    "name": "Gaurav Kumar",
-    "contact": "+917028164099",
-    "email": ""
-  }
+"currency": "INR",
+"accept_partial": false,
+"expire_by": 1691097057,
+"reference_id": "TQUU876",
+"description": "Payment for bill ID #23456",
+"customer": {
+"name": "Riya Shah",
+"contact": "+917028164099"
+}
 });
 
 var config = {
