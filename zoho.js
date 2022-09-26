@@ -13,7 +13,11 @@ var config = {
 
 axios(config)
 .then(function (response) {
-  console.log(JSON.stringify(response.data));
+  var d = JSON.stringify(response.data);
+  console.log(d);
+  
+  var count = Object.keys(d.data).length;
+  console.log(count);
 })
 .catch(function (error) {
   console.log(error);
