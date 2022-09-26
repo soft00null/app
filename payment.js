@@ -5,20 +5,13 @@ var data = JSON.stringify({
   "currency": "INR",
   "accept_partial": false,
   "expire_by": 1691097057,
-  "reference_id": "TS787800876", //chnage this every time
+  "reference_id": "TUU776876",
   "description": "Payment for bill ID #23456",
   "customer": {
     "name": "Gaurav Kumar",
     "contact": "+917028164099",
     "email": ""
-  },
-  "notify": {
-    "sms": false,
-    "email": false
-  },
-  "reminder_enable": true,
-  "callback_url": "https://example-callback-url.com/",
-  "callback_method": "get"
+  }
 });
 
 var config = {
