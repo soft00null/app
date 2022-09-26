@@ -1,14 +1,14 @@
 // get current date and time
           var datetime = new Date();
 
-let intlDateObj = new Intl.DateTimeFormat('en-US', {
+let intlDateObj = new Intl.DateTimeFormat('en-GB', {
                timeZone: "Asia/Kolkata",
                dateStyle: 'full', 
                timeStyle: 'full'
            });
-          let date = new Intl.DateTimeFormat('en-US', {
+          let date = new Intl.DateTimeFormat('en-GB', {
                timeZone: "Asia/Kolkata",
-               dateStyle: 'full' 
+               dateStyle: 'long' 
                //timeStyle: 'full'
            });
           let time = new Intl.DateTimeFormat('en-US', {
