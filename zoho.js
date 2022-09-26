@@ -37,5 +37,9 @@ axios(config).then(function (response) {
   console.log(count);
 })
 .catch(function (error) {
-  console.log(error);
+  
+  var d = JSON.stringify(error.data);
+  var jsonObj = JSON.parse(d); //Fetch Object
+  console.log(jsonObj.code);
+  
 });

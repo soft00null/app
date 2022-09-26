@@ -130,7 +130,7 @@ app.post("/webhook", (req, res) => {
           // End of google sheet code
           
         }
-      else if (msg_body == "Checkin:HQ" || msg_body == "Checkin:Kamothe")
+      else if (msg_body == "Checkin:HQ" || msg_body == "Checkin:Kamothe" )
         {
           
           var rest_data = '';
@@ -158,18 +158,12 @@ app.post("/webhook", (req, res) => {
   
                   var jsonObj = JSON.parse(d); //Fetch Object
                   console.log(jsonObj.data);
-            
-                  if (jsonObj.code == "3100")
-                  {
-                    
-                    var token_no = 90001; // When there is no data 
-                  }
-                  else if (jsonObj.code == "3000")
-                  {
+             
+                 
                     var count = Object.keys(jsonObj.data).length; //Count length of total entries in Centre
                     console.log(jsonObj.data);
                     var token_no = count + 90001; //Set the Token number
-                  }
+                
                   
                   
             
