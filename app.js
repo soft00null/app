@@ -130,7 +130,7 @@ app.post("/webhook", (req, res) => {
           // End of google sheet code
           
         }
-      else if (msg_body == "Checkin:HQ" || msg_body == "Checkin:Kamothe" )
+      else if (msg_body == "Checkin:HQ" || msg_body == "Checkin:kamothe" )
         {
           
           var rest_data = '';
