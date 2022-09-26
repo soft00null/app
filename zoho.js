@@ -11,8 +11,7 @@ var config = {
   data : data
 };
 
-axios(config)
-.then(function (response) {
+axios(config).then(function (response) {
   var d = JSON.stringify(response.data);
   
   var jsonObj = JSON.parse(d); //Fetch Object

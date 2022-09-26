@@ -33,7 +33,7 @@ app.post("/webhook", (req, res) => {
       let from_name = req.body.entry[0].changes[0].value.contacts[0].profile.name; // extract the phone number from the webhook payload
       let msg_body = req.body.entry[0].changes[0].value.messages[0].text.body; // extract the message text from the webhook payload
       
-      if (msg_body == "Checkin:HQ")
+      if (msg_body == "Checkin:HQ" || msg_body == "Checkin:Kamothe")
         {
                          
           
