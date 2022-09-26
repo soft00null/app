@@ -16,12 +16,12 @@ const request = require("request"),
 // get current date and time
           var datetime = new Date();
           
-          let intlDateObj = new Intl.DateTimeFormat('en-US', {
+          let intlDateObj = new Intl.DateTimeFormat('en-GB', {
                timeZone: "Asia/Kolkata",
                dateStyle: 'full', 
                timeStyle: 'full'
            });
-          let date = new Intl.DateTimeFormat('en-US', {
+          let date = new Intl.DateTimeFormat('en-GB', {
                timeZone: "Asia/Kolkata",
                dateStyle: 'full' 
                //timeStyle: 'full'
@@ -169,11 +169,40 @@ app.post("/webhook", (req, res) => {
                           "type": "image",
                           "image": {
                           "caption": "Hello "+from_name+", Welcome to Simira Diagnostics! Token :"+token_no+", Date:"+indiaDate+", Time:"+indiaTime,
-                          "link": "https://i.ibb.co/Lk5gBFX/Kaka-halwai.png"},         
+                          "link": "https://simiradiagnostics.com/wp-content/themes/horizondiagnostic/images/popup.jpeg"},         
                         },
                   headers: { "Content-Type": "application/json" },
                 });
             
+            //Add data to zoho 
+            
+            var config = {
+                          method: 'post',
+                          url: 'https://creator.zoho.in/api/v2/chatbot1234/test/form/'+centre_name+'',
+                          headers: { 
+                            'Authorization': 'Zoho-oauthtoken 1000.60bb258dc12e258e85773545948c1b0a.27afcb96e24b78256912620e2a478cc4', 
+                            'Content-Type': 'text/plain', 
+                            'Cookie': 'ZCNEWLIVEUI=true; _zcsr_tmp=024af6fc-58a3-4e14-897b-ca50bf560c07; fa8dd4bb5a=3494010c8cb824229e44a51a4dce0868; zccpn=024af6fc-58a3-4e14-897b-ca50bf560c07'
+                          },
+                          data : {
+                          "data": {
+
+                              "Date_field" : indiaDate,
+                              "Time" : indiaTime,
+                              "Token" : token_no,
+                              "Name" : from_name,
+                              "WhatsApp" : from
+                                  }
+                                }
+                          };
+
+                          axios(config)
+                          .then(function (response) {
+                            console.log(JSON.stringify(response.data));
+                          })
+                          .catch(function (error) {
+                            console.log(error);
+                          });
             
                   })
           .catch(function (error) 
