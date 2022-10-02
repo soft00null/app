@@ -18,32 +18,6 @@ const request = require("request"),
 
 
 
-// get current date and time
-          var datetime = new Date();
-          
-          let intlDateObj = new Intl.DateTimeFormat('en-GB', {
-               timeZone: "Asia/Kolkata",
-               dateStyle: 'full', 
-               timeStyle: 'full'
-           });
-          let date = new Intl.DateTimeFormat('en-GB', {
-               timeZone: "Asia/Kolkata",
-               dateStyle: 'full' 
-               //timeStyle: 'full'
-           });
-          let time = new Intl.DateTimeFormat('en-US', {
-               timeZone: "Asia/Kolkata",
-               //dateStyle: 'full' 
-               timeStyle: 'medium'
-           });
-         
-          let indiaDate = date.format(datetime);
-    
-          let indiaTime = time.format(datetime);
-          
-           console.log('India date: ' + indiaDate);
-           console.log('India Time: ' + indiaTime);
-
 
 // Sets server port and logs message on success
 app.listen(process.env.PORT || 1337, () => console.log("webhook is listening"));
@@ -70,68 +44,38 @@ app.post("/webhook", (req, res) => {
         {
                          
           
-          // Add to google sheet code start
-          var sheetdb = require('sheetdb-node');
-         
-          // create a config file
-          var config = {
-            address: '0kzd0o37r10g4',
-          };
           
-          // Create new client
-          var client = sheetdb(config);
-          
-          //const cli = sheetdb({ address: '0kzd0o37r10g4', sheet: 'HQ' }); //Get count from sheet HQ
-          
-          client.endpoint('count').then(function(data) { // count total no of rows
-          console.log(data);
-          var jsonParsed = JSON.parse(data);
-          console.log(jsonParsed.rows);
-          var index = jsonParsed.rows + 1; //get index 
-          var visit_token = 123400001 + jsonParsed.rows; // token number 
-          
-          
-            
-          //Send WhatsApp reply  
-          axios({
-          method: "POST", // Required, HTTP method, a string, e.g. POST, GET
-          url: "https://graph.facebook.com/v12.0/" + phone_number_id + "/messages?access_token=" +token,
-          data: {
-            messaging_product: "whatsapp",
-            to: from,
-            //text: { body: "hello: " + msg_body },
-            //Send image 
-            "type": "image",
-            "image": {
-                "caption": "Hello "+from_name+", Welcome to Simira Diagnostics! Your token number is: "+visit_token+" & Check in time is "+indiaTime,
-                "link": "https://simiradiagnostics.com/wp-content/themes/horizondiagnostic/images/popup.jpeg"},
-            //"link": "https://i.ibb.co/hff1hmb/chitle.png"}, //Send image in WhatsApp reply
-            //https://bwipjs-api.metafloor.com/?bcid=code128&text="+visit_token+"&scale=3&rotate=N&includetext&backgroundcolor=FFFFFF
-
-          },
-          headers: { "Content-Type": "application/json" },
-          }); //End of WhatsApp reply
-
-             // End of date and time module
-             // Adds single row
-              client.create({ Index: index, Token: visit_token, Name: from_name, Phone: from, Date: indiaDate , Time: indiaTime }, "HQ").then(function(data) {
-                console.log(data);
-              }, function(err){
-                console.log(err);
-              });          
-           //Count total rows in sheet
-            
-          }, function(error){
-              console.log(error);
-          })
-
-         
-
-          // End of google sheet code
           
         }
       else if (msg_body == "Checkin:HQ" || msg_body == "Checkin:kamothe" )
         {
+          
+          
+// get current date and time
+          var datetime = new Date();
+          
+          let intlDateObj = new Intl.DateTimeFormat('en-GB', {
+               timeZone: "Asia/Kolkata",
+               dateStyle: 'full', 
+               timeStyle: 'full'
+           });
+          let date = new Intl.DateTimeFormat('en-GB', {
+               timeZone: "Asia/Kolkata",
+               dateStyle: 'full' 
+               //timeStyle: 'full'
+           });
+          let time = new Intl.DateTimeFormat('en-US', {
+               timeZone: "Asia/Kolkata",
+               //dateStyle: 'full' 
+               timeStyle: 'medium'
+           });
+         
+          let indiaDate = date.format(datetime);
+    
+          let indiaTime = time.format(datetime);
+          
+           console.log('India date: ' + indiaDate);
+           console.log('India Time: ' + indiaTime);
           
           var rest_data = '';
 
